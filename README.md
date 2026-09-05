@@ -1,43 +1,50 @@
-# Seabelo Motloung Portfolio
+# Seabelo Blessing Motloung Portfolio
 
-A clean, deploy-ready software developer portfolio for Seabelo Blessing Motloung.
+Professional portfolio for **Seabelo Blessing Motloung**, published at **https://seabelomotloung.co.za**.
 
-## Updated contact details
+## Design direction
+The portfolio is intentionally written around **why the work was built**, not only what technologies were used. Project case studies now explain:
+- the problem or question behind the project;
+- why the problem mattered;
+- the decisions and trade-offs considered;
+- what the project taught me as a developer;
+- a direct link to the implementation on GitHub.
+
+## 3D and visual system
+- Professional dark editorial interface designed around the founder portrait.
+- Layered 3D portrait card with restrained perspective depth.
+- Pointer-based depth motion instead of scroll hijacking.
+- Motion automatically disables for users who prefer reduced motion.
+- Normal document flow is preserved so content does not overlap or break while scrolling.
+- Responsive navigation and layouts for desktop, tablet and mobile.
+
+## Performance work
+- `assets/styles.css` minified.
+- `assets/script.js` minified.
+- JavaScript loaded with `defer`.
+- Lightweight CSS/JS depth effects instead of a heavy 3D library.
+- Responsive optimized WebP portrait sources.
+- Layout space is reserved for the portrait to reduce content shifting.
+
+## Search visibility / SEO
+- Correct canonical URLs for `seabelomotloung.co.za`.
+- Search-focused titles and meta descriptions using the full name **Seabelo Blessing Motloung**.
+- `Person` and `WebSite` JSON-LD structured data on the home page.
+- Open Graph metadata.
+- Corrected `sitemap.xml` (the previous version used `example.com`).
+- Corrected absolute sitemap URL in `robots.txt`.
+- Search-friendly semantic headings and internal navigation.
+
+## Main pages
+- `index.html` — purpose-led homepage and developer positioning.
+- `about.html` — why I chose software development and how I approach problems.
+- `projects.html` — "Why I Build" project case studies.
+- `resume.html` — recruiter-focused professional snapshot.
+- `contact.html` — hiring and contact information.
+
+## Contact
 - Email: seabelomotloung@gmail.com
 - GitHub: https://github.com/motloungseabelo-gif
 
-## What is included
-- `index.html` — landing page
-- `about.html` — first-person professional story
-- `projects.html` — updated GitHub project list
-- `resume.html` — recruiter-friendly resume snapshot
-- `contact.html` — contact details and hiring message
-- `assets/styles.css` — responsive styling
-- `assets/script.js` — mobile menu and scroll reveal
-- `assets/images/` — local portfolio illustrations
-- `Seabelo_Blessing_Motloung_CV.pdf` — downloadable CV
-
-## GitHub projects linked
-- Spendwise App
-- SBM ConTech Industries Website
-- Seabelo Portfolio
-- Portfolio Website
-- Kayak Database Management System
-- FocusFlow JS
-- Jennifer's Mixed Grillers Website
-
-## How to run locally
-Open `index.html` in a browser.
-
-## How to deploy
-### Netlify
-Drag this whole folder into Netlify Drop.
-
-### Vercel
-Import the folder as a static site. No build command is needed.
-
-### GitHub Pages
-Upload the files to a repository, then enable GitHub Pages from the repository settings. Use the root folder as the source.
-
-## Notes
-The wording is written in first person and kept focused on software development, recruiter review, projects, achievements and job opportunities. No ID number is included in the website pages.
+## Search engine next step
+Add `https://seabelomotloung.co.za` to Google Search Console, submit `https://seabelomotloung.co.za/sitemap.xml`, and request indexing for the homepage after deployment. Search-engine indexing is controlled by Google and can take time even when the technical setup is correct.
