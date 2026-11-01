@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
+Disallow: /portfolio_site/
 Sitemap: https://seabelomotloung.co.za/sitemap.xml

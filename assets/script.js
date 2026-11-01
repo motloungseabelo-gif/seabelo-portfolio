@@ -1,4 +1,102 @@
-(()=>{document.querySelectorAll('.portrait-card img').forEach(e=>{const t='https://raw.githubusercontent.com/motloungseabelo-gif/sbmcontech-website/main/images/founder-480.webp';e.onerror=()=>{e.onerror=null,e.src='assets/images/developer-workspace.svg',e.removeAttribute('srcset')},e.src=t,e.srcset=t+' 480w, https://raw.githubusercontent.com/motloungseabelo-gif/sbmcontech-website/main/images/founder-960.webp 960w',e.sizes='(max-width:650px) 76vw,(max-width:980px) 390px,440px',e.decoding='async'});const e=document.querySelector('.nav-toggle'),t=document.querySelector('.primary-nav');if(e&&t){e.addEventListener('click',()=>{const n=t.classList.toggle('open');e.setAttribute('aria-expanded',String(n)),e.textContent=n?'Close':'Menu'}),t.querySelectorAll('a').forEach(n=>n.addEventListener('click',()=>{t.classList.remove('open'),e.setAttribute('aria-expanded','false'),e.textContent='Menu'}))}const n=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const e=new IntersectionObserver(t=>{t.forEach(t=>{t.isIntersecting&&(t.target.classList.add('is-visible'),e.unobserve(t.target))})},{threshold:.1,rootMargin:'0px 0px -4% 0px'});n.forEach(t=>e.observe(t))}else n.forEach(e=>e.classList.add('is-visible'));const o=document.querySelector('.portrait-card'),r=matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)');if(o&&r.matches){let e=0,t=0,n=0;const r=()=>{n=0,o.style.setProperty('--rx',`${t}deg`),o.style.setProperty('--ry',`${e}deg`)};o.addEventListener('pointermove',i=>{const s=o.getBoundingClientRect();e=((i.clientX-s.left)/s.width-.5)*8,t=-((i.clientY-s.top)/s.height-.5)*8,n||(n=requestAnimationFrame(r))}),o.addEventListener('pointerleave',()=>{e=0,t=0,n||(n=requestAnimationFrame(r))})}})();
+(() => {
+  'use strict';
+  document.documentElement.classList.add('js');
 
-/* Progressive depth: no library, no forced scrolling, no mobile animation cost. */
-(()=>{const scene=document.querySelector(".portrait-scene");if(!scene||!window.matchMedia("(min-width: 981px) and (prefers-reduced-motion: no-preference)").matches)return;let ticking=false;const update=()=>{ticking=false;const rect=scene.getBoundingClientRect();if(rect.bottom<0||rect.top>innerHeight)return;const progress=Math.max(-1,Math.min(1,(innerHeight/2-(rect.top+rect.height/2))/innerHeight));scene.style.setProperty("--scroll-depth",Math.round(progress*90)+"px");scene.style.setProperty("--scroll-tilt",(progress*3).toFixed(2)+"deg")};addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});addEventListener("resize",update,{passive:true});update()})();
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.primary-nav');
+  const closeMenu = () => {
+    if (!toggle || !nav) return;
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.querySelector('span').textContent = 'Menu';
+  };
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.querySelector('span').textContent = open ? 'Close' : 'Menu';
+    });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.site-header')) closeMenu();
+    });
+    const smallScreen = matchMedia('(max-width: 760px)');
+    smallScreen.addEventListener('change', closeMenu);
+  }
+
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const cursor = document.createElement('div');
+  cursor.className = 'sbm-cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+  cursor.innerHTML = '<svg viewBox="0 0 22 30" aria-hidden="true"><path d="M2 2v22l6-6 5 10 5-3-5-10 8-1Z"/></svg><span>SBM</span>';
+  document.body.append(cursor);
+  let cursorFrame = 0;
+  let cursorX = 0;
+  let cursorY = 0;
+  const hideCursor = () => {
+    if (cursorFrame) cancelAnimationFrame(cursorFrame);
+    cursorFrame = 0;
+    cursor.classList.remove('visible');
+    document.body.classList.remove('sbm-cursor-active');
+  };
+  document.addEventListener('pointermove', event => {
+    if (!finePointer.matches || event.pointerType !== 'mouse') return;
+    cursorX = event.clientX;
+    cursorY = event.clientY;
+    cursor.classList.toggle('over-link', Boolean(event.target.closest('a,button')));
+    if (!cursorFrame) cursorFrame = requestAnimationFrame(() => {
+      cursorFrame = 0;
+      cursor.style.transform = `translate3d(${cursorX - 2}px,${cursorY - 2}px,0)`;
+      cursor.classList.add('visible');
+      document.body.classList.add('sbm-cursor-active');
+    });
+  }, { passive: true });
+  document.addEventListener('pointerout', event => { if (!event.relatedTarget) hideCursor(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Tab') hideCursor(); });
+  addEventListener('blur', hideCursor);
+  finePointer.addEventListener('change', hideCursor);
+
+  const scene = document.querySelector('.portrait-scene');
+  if (!scene) return;
+  const motion = matchMedia('(min-width: 981px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+  let frame = 0;
+  let rotationX = 0;
+  let rotationY = 0;
+  const render = () => {
+    frame = 0;
+    if (!motion.matches) {
+      scene.style.removeProperty('--rx');
+      scene.style.removeProperty('--ry');
+      scene.style.removeProperty('--depth');
+      return;
+    }
+    const bounds = scene.getBoundingClientRect();
+    scene.style.setProperty('--rx', `${rotationX.toFixed(2)}deg`);
+    scene.style.setProperty('--ry', `${rotationY.toFixed(2)}deg`);
+    const depth = bounds.bottom > 0 && bounds.top < innerHeight ? Math.max(-10, Math.min(10, scrollY * .035)) : 0;
+    scene.style.setProperty('--depth', `${depth.toFixed(1)}px`);
+  };
+  const schedule = () => {
+    if (!frame) frame = requestAnimationFrame(render);
+  };
+  scene.addEventListener('pointermove', event => {
+    if (!motion.matches) return;
+    const bounds = scene.getBoundingClientRect();
+    rotationX = (.5 - (event.clientY - bounds.top) / bounds.height) * 4;
+    rotationY = ((event.clientX - bounds.left) / bounds.width - .5) * 4;
+    schedule();
+  }, { passive: true });
+  scene.addEventListener('pointerleave', () => {
+    rotationX = 0;
+    rotationY = 0;
+    schedule();
+  });
+  addEventListener('scroll', () => { if (motion.matches) schedule(); }, { passive: true });
+  motion.addEventListener('change', schedule);
+})();

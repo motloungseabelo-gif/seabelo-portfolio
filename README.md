@@ -1,59 +1,18 @@
-# Seabelo Blessing Motloung — Software Developer
+# Seabelo Blessing Motloung — Portfolio
 
-Professional portfolio for **Seabelo Blessing Motloung**, published at **https://seabelomotloung.co.za**.
+Personal software developer portfolio at https://seabelomotloung.co.za/.
 
-**Professional identity:** Software Developer
+## Content
+Five short pages: Home, Work, About, CV and Contact. The November 2026 update uses the supplied CV and professional portrait. Featured projects are CyberAware, Kayak Database Management System and FocusFlow. Contact details and project links come from the CV. The downloadable PDF is the unmodified supplied document.
 
-## Core development skills
-- C# and .NET / ASP.NET concepts
-- Docker
-- Azure DevOps and CI/CD concepts
-- SQL and Oracle SQL
-- HTML, CSS and JavaScript
-- Kotlin and Android development
-- Git and GitHub
-- Responsive web development, accessibility and documentation
+## Visual system
+Graphite, off-white and mint-cyan, with a subtle grid and a framed portrait. Small desktop-only portrait depth effects respect reduced motion. A lightweight SVG cursor displays SBM on fine-pointer devices; touch devices retain native behaviour. Native cursor fallback and visible keyboard focus are provided.
 
-## Design direction
-The portfolio is intentionally written around **why the work was built**, not only what technologies were used. Project case studies explain the problem, why it mattered, the decisions and trade-offs considered, and what each project taught me as a Software Developer.
+## Technical notes
+Buildless HTML/CSS/JavaScript; no frameworks, remote fonts, external portrait requests or client-side dependencies. Local 480px and 960px WebP portraits, deferred JavaScript, reserved image dimensions, semantic navigation and a progressively enhanced mobile menu. Main content stays available without JavaScript. Each page has a canonical URL, unique metadata, Open Graph, Twitter metadata and structured data. Sitemap and robots are retained for the existing domain.
 
-## 3D and visual system
-- Professional dark editorial interface designed around my portrait.
-- Layered 3D portrait card with restrained perspective depth.
-- Pointer-based depth motion instead of scroll hijacking.
-- Motion automatically disables for users who prefer reduced motion.
-- Normal document flow is preserved so content does not overlap or break while scrolling.
-- Responsive navigation and layouts for desktop, tablet and mobile.
+## Hosting
+GitHub Pages publishes the repository root from main. Preserve CNAME. Legacy portfolio_site HTML routes redirect to the current root pages. No Sites project or hosting migration is required.
 
-## Performance work
-- `assets/styles.css` minified.
-- `assets/script.js` minified.
-- JavaScript loaded with `defer`.
-- Lightweight CSS/JS depth effects instead of a heavy 3D library.
-- Responsive optimized WebP portrait sources.
-- Layout space is reserved for the portrait to reduce content shifting.
-
-## Search visibility / SEO
-- Correct canonical URLs for `seabelomotloung.co.za`.
-- Search-focused titles and descriptions consistently identify **Seabelo Blessing Motloung as a Software Developer**.
-- `Person` and `WebSite` JSON-LD structured data on the home page.
-- `Person.jobTitle` is set to **Software Developer** and `knowsAbout` includes C#, Docker, Azure DevOps, SQL, JavaScript, Kotlin/Android and Git/GitHub.
-- Open Graph and social image metadata use the professional portrait.
-- Correct `sitemap.xml` and absolute sitemap URL in `robots.txt`.
-- Legacy duplicate pages are excluded from indexing and redirect to the current portfolio pages.
-
-## Main pages
-- `index.html` — purpose-led Software Developer homepage.
-- `about.html` — why I chose software development and how I approach problems.
-- `projects.html` — "Why I Build" Software Developer case studies.
-- `resume.html` — professional Software Developer profile and updated skills.
-- `contact.html` — public contact via email and GitHub only.
-
-## Public contact
-- Email: seabelomotloung@gmail.com
-- GitHub: https://github.com/motloungseabelo-gif
-
-No phone number is published on the website.
-
-## Search engine next step
-Add `https://seabelomotloung.co.za` to Google Search Console, submit `https://seabelomotloung.co.za/sitemap.xml`, and request indexing after deployment. Search and AI-generated results are controlled by the search provider, so the site can strongly signal the **Software Developer** identity but cannot guarantee when or exactly how an AI overview will display it.
+## Checks
+Use node --check assets/script.js. Check local links, metadata, portrait and CV loading; verify desktop and mobile layouts, navigation, project anchors, keyboard access and reduced-motion behaviour before publishing.
